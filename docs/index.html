@@ -88,6 +88,12 @@ tr.highlight { background: #FFF8E1; font-weight: 600; } td strong { color: var(-
 .figure { margin: 28px 0; text-align: center; }
 .figure img { max-width: 100%; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
 .figure figcaption { font-size: 0.85em; color: var(--muted); margin-top: 8px; font-style: italic; }
+.hero-banner { width: 100%; overflow: hidden; max-height: 340px; position: relative; }
+.hero-banner img { width: 100%; height: 340px; object-fit: cover; display: block; }
+.hero-banner::after { content:''; position:absolute; bottom:0; left:0; right:0; height:60px; background:linear-gradient(transparent, var(--bg)); }
+.ai-figure { margin: 32px 0; text-align: center; }
+.ai-figure img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+.ai-figure figcaption { font-size: 0.85em; color: var(--muted); margin-top: 10px; font-style: italic; }
 .callout { background: #E8F5E9; border-left: 4px solid var(--green); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; }
 .callout.warning { background: #FFF3E0; border-left-color: var(--accent); }
 .callout.info { background: #E3F2FD; border-left-color: var(--primary); }
@@ -132,6 +138,10 @@ ul { margin: 12px 0 16px 24px; } li { margin-bottom: 6px; }
     <div class="item"><div class="label">TRL</div><div class="value">3–4 → 5–6</div></div>
   </div>
 </header>
+
+<div class="hero-banner">
+  <img src="figures/ai_hero_motor_render.png" alt="AURORA X Motor Concept">
+</div>
 
 <div class="kpi-strip">
   <div class="kpi-item highlight"><div class="kpi-value">5.9</div><div class="kpi-label" data-i18n="kpi1">kW/kg continuous</div></div>
@@ -192,6 +202,11 @@ ul { margin: 12px 0 16px 24px; } li { margin-bottom: 6px; }
 
   <h3 id="pillars" data-i18n="s1_2">1.2 The Breakthrough: Four Pillars of AURORA X</h3>
 
+  <figure class="ai-figure">
+    <img src="figures/ai_technology_infographic.png" alt="AURORA X Technology Pillars">
+    <figcaption data-i18n="ai_infographic">AURORA X integrated technology pillars: EM core, GaN power electronics, two-phase cooling, Halbach magnetics</figcaption>
+  </figure>
+
   <figure class="figure">
     <img src="figures/fig1_architecture.png" alt="System Architecture">
     <figcaption data-i18n="fig1">Fig. 1 — AURORA X four-pillar integrated architecture</figcaption>
@@ -219,6 +234,11 @@ ul { margin: 12px 0 16px 24px; } li { margin-bottom: 6px; }
       <p data-i18n="pil4_d">N48SH NdFeB profiled segments: +40% airgap flux density, −87% cogging torque, ≤3% torque ripple target. Demagnetization margin ≥20% at 150°C peak current.</p>
     </div>
   </div>
+
+  <figure class="ai-figure">
+    <img src="figures/ai_exploded_view.png" alt="AURORA X Exploded View">
+    <figcaption data-i18n="ai_exploded">Exploded view: Halbach rotor, stator windings, GaN inverter PCB, and two-phase cooling chamber</figcaption>
+  </figure>
 
   <h4 data-i18n="inv_perf">GaN Inverter Performance</h4>
   <table>
@@ -323,6 +343,12 @@ ul { margin: 12px 0 16px 24px; } li { margin-bottom: 6px; }
   </table>
 
   <h3 id="thermal" data-i18n="s1_5">1.5 Thermal Design</h3>
+
+  <figure class="ai-figure">
+    <img src="figures/ai_cooling_cutaway.png" alt="Two-Phase Cooling Cutaway">
+    <figcaption data-i18n="ai_cooling">Two-phase thermosyphon cross-section: vapor chamber around stator, condensation zone with external fins</figcaption>
+  </figure>
+
   <figure class="figure">
     <img src="figures/fig4_thermal.png" alt="Thermal Comparison">
     <figcaption data-i18n="fig4">Fig. 4 — Cooling method comparison in 100 mm stator OD envelope</figcaption>
@@ -389,6 +415,12 @@ ul { margin: 12px 0 16px 24px; } li { margin-bottom: 6px; }
   </div>
 
   <h3 id="market" data-i18n="s2_1">2.1 Market Opportunity</h3>
+
+  <figure class="ai-figure">
+    <img src="figures/ai_evtol_concept.png" alt="eVTOL Concept with AURORA X Motors">
+    <figcaption data-i18n="ai_evtol">eVTOL urban air mobility concept powered by AURORA X integrated propulsion units</figcaption>
+  </figure>
+
   <figure class="figure">
     <img src="figures/fig9_market.png" alt="Market">
     <figcaption data-i18n="fig9">Fig. 9 — Addressable market projections (UAV, eVTOL, electric motors)</figcaption>
@@ -714,6 +746,10 @@ r05:"R05: WBG-Lieferkette",r_c:"Kritisch",r05m:"Frühbestellung M1; 2. Quelle; S
 r08:"R08: Gewicht überschritten",r_h4:"Hoch",r08m:"Komponentenweises Massebudget; Topologieoptimierung",
 r09:"R09: Schlüsselperson verlässt",r_h5:"Hoch",r09m:"Benannte Stellvertreter; systematische Wissensdokumentation",
 fig10:"Abb. 10 — Risikomatrix (nach Minderung)",
+ai_infographic:"Integrierte Technologiesäulen von AURORA X: EM-Kern, GaN-Leistungselektronik, Zweiphasenkühlung, Halbach-Magnetik",
+ai_exploded:"Explosionsdarstellung: Halbach-Rotor, Statorwicklungen, GaN-Wechselrichter-PCB und Zweiphasenkühlkammer",
+ai_cooling:"Zweiphasen-Thermosiphon-Querschnitt: Dampfkammer um den Stator, Kondensationszone mit externen Rippen",
+ai_evtol:"eVTOL-Konzept für urbane Luftmobilität mit AURORA X integrierten Antriebseinheiten",
 drg_p:"Design-Review-Gates: SRR M4, PDR M10, CDR M16, TRR M22, FR M24.",
 s3_4:"3.4 Team",th_role:"Rolle",th_exp:"Fachgebiet",
 tm1:"Leitender EM-Ingenieur",tm1e:"PMSM-Design, FEA, Halbach-Optimierung",
@@ -848,6 +884,10 @@ r05:"R05: Ланцюг постачання WBG",r_c:"Критичний",r05m:"
 r08:"R08: Перевищення ваги",r_h4:"Високий",r08m:"Покомпонентний масовий бюджет; оптимізація топології",
 r09:"R09: Ключова особа звільняється",r_h5:"Високий",r09m:"Призначені заступники; систематична документація знань",
 fig10:"Рис. 10 — Матриця ризиків (після пом'якшення)",
+ai_infographic:"Інтегровані технологічні стовпи AURORA X: ЕМ-ядро, GaN силова електроніка, двофазне охолодження, магнітика Халбаха",
+ai_exploded:"Вигляд у розрізі: ротор Халбаха, обмотки статора, PCB інвертора GaN та камера двофазного охолодження",
+ai_cooling:"Поперечний переріз двофазного термосифона: парова камера навколо статора, зона конденсації із зовнішніми ребрами",
+ai_evtol:"Концепт eVTOL міської аеромобільності з інтегрованими силовими установками AURORA X",
 drg_p:"Ворота проектного огляду: SRR M4, PDR M10, CDR M16, TRR M22, FR M24.",
 s3_4:"3.4 Команда",th_role:"Роль",th_exp:"Експертиза",
 tm1:"Провідний інженер ЕМ-проектування",tm1e:"Проектування PMSM, FEA, оптимізація Халбаха",
