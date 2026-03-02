@@ -8,6 +8,8 @@
 **Requested EU Contribution:** EUR 1,348,775
 **TRL Entry:** 3–4 → **TRL Exit:** 5–6
 
+> **List of Figures:** Fig. 1 System Architecture | Fig. 2 Benchmarking | Fig. 3 Loss Budget | Fig. 4 Thermal Comparison | Fig. 5 Mass Budget | Fig. 6 Gantt Chart | Fig. 7 Budget Breakdown | Fig. 8 TRL Roadmap | Fig. 9 Market Projections | Fig. 10 Risk Matrix
+
 ---
 
 # Section 1: EXCELLENCE
@@ -26,7 +28,9 @@ Modern heavy-lift UAV and eVTOL platforms demand electric motors with continuous
 
 ### 1.1.2 The Breakthrough: Four Pillars of AURORA X
 
-AURORA X addresses all three barriers through a synergistic architecture combining four innovations in a single integrated propulsion unit:
+AURORA X addresses all three barriers through a synergistic architecture combining four innovations in a single integrated propulsion unit (Fig. 1):
+
+![Fig. 1: AURORA X System Architecture](../figures/fig1_architecture.png)
 
 **Pillar 1: Dual-Channel Coaxial Machine.**
 Two independent 3-phase electromagnetic channels share a common stator and rotor. In nominal operation, both channels share the load, each handling 50% of rated power with reduced copper losses. Upon failure of one channel, the surviving channel sustains 50% power — providing hardware-level redundancy without additional mass. This fail-operational capability is critical for UAV safety certification under EASA CS-23.1309.
@@ -69,15 +73,19 @@ Profiled quasi-Halbach magnet segments (N48SH NdFeB, max operating temperature 1
 
 ### 1.1.3 Benchmarking Against State of the Art
 
+![Fig. 2: Power Density and Efficiency Benchmarking](../figures/fig2_benchmarking.png)
+
 | Motor / System | Type | Cont. kW/kg | Efficiency | Cooling | Integrated Inv. | Redundancy |
 |---|---|---|---|---|---|---|
 | T-Motor U15 II | Outrunner | 2.4 | ~88% | Air | No | No |
 | EMRAX 228 | Axial flux | 5.8 | 96% | Liquid | No | No |
 | H3X HPDM-250 | Radial+inv | 10.7 | 92.9% sys | Liquid | Yes (SiC) | No |
 | Safran ENGINeUS | PMSM | ~5.0 | — | Air | Yes | No |
-| **AURORA X (target)** | **Coaxial** | **≥5.0** | **≥95%** | **Two-phase** | **Yes (GaN)** | **Yes (dual)** |
+| **AURORA X (target)** | **Coaxial** | **6.15** | **95.3%** | **Two-phase** | **Yes (GaN)** | **Yes (dual)** |
 
 AURORA X uniquely combines integrated inverter, two-phase cooling, AND hardware redundancy in the 10–50 kW class. No existing product or announced development programme offers this combination.
+
+**Gap Analysis vs. EU Projects** (Fig. 2, right): No EU-funded project addresses an integrated electric drive (motor + WBG inverter + two-phase cooling) in the 10–100 kW class for UAV/eVTOL with >5 kW/kg system power density. Related projects (FITGEN, HiEFFICIENT, ASuMED, HECATE, HE-ART) either target automotive applications, different power ranges (>500 kW), or do not integrate all four pillars.
 
 ---
 
@@ -111,37 +119,50 @@ Multi-objective optimization (Pareto-based, NSGA-II) runs across the EM-Thermal 
 
 ### 1.2.3 Motor Design Parameters
 
-Based on preliminary analytical calculations:
+Based on preliminary analytical calculations (validated by Python parametric model):
 
 | Parameter | Value | Notes |
 |---|---|---|
 | Rated power | 20 kW continuous, 30 kW peak (60s) | Dual-channel load sharing |
 | DC bus voltage | 96V | 24S LiPo compatible |
-| Max speed | 10,000 RPM | Direct drive or 1:2 reduction |
-| Rated torque | 19.1 Nm | At 10,000 RPM |
-| Stator OD | 140 mm | |
-| Stack length | 70 mm | |
-| Airgap | 0.5 mm | |
-| Slots / Poles | 18s / 20p | Winding factor 0.945 |
-| Winding | Dual 3-phase, concentrated, 30° shift | |
-| Magnet grade | N48SH (Br=1.38T, Hcj≥20 kOe) | Max 150°C |
-| Airgap flux density | 0.95–1.05 T (Halbach) | |
-| Current density | 22 A/mm² (continuous, two-phase cooled) | |
+| Rated speed | 5,000 RPM | eVTOL cruise point |
+| Max speed | 8,000 RPM | Field weakening range 1:1.6 |
+| Rated torque | 38.2 N·m | At 5,000 RPM |
+| Topology | Outer-rotor SPM | Quasi-Halbach array |
+| Stator OD / Rotor OD | 100 / 74 mm | Compact form factor |
+| Active length | 74 mm | L/D ≈ 0.74 |
+| Airgap | 1.0 mm | Mechanical + retention |
+| Slots / Poles | 12s / 10p | FSCW, k_w1 = 0.933 |
+| Winding | Dual 3-phase, concentrated, 30° shift | Class H insulation |
+| Magnet grade | N48SH (Br=1.38 T, Hcj≥1592 kA/m) | Max 150°C |
+| Magnet thickness | 3.5 mm | Quasi-Halbach segments |
+| Airgap flux density | 1.094 T | Halbach enhancement |
+| Lamination | NO20 (0.20 mm Si-steel) | For 833 Hz operation |
+| Current density | 19 A/mm² (continuous, two-phase cooled) | Margin to 25+ A/mm² peak |
 | Slot fill factor | 0.50 (VPI impregnated) | |
+
+**Note:** Tooth flux density reaches 1.86 T at the tooth root (limit 1.8 T for NO20), representing 3% local saturation. This is acceptable for preliminary design and will be resolved through tooth profile optimization in detailed FEA (WP2, Task 2.2).
 
 ### 1.2.4 Loss Budget at Rated Point (20 kW)
 
-| Source | Losses (W) | Location |
-|---|---|---|
-| Copper (slot + end-winding) | 600 | Stator windings |
-| Iron (hysteresis + eddy) | 300 | Stator teeth + back-iron |
-| Rotor (eddy in magnets + sleeve) | 100 | Rotor surface |
-| Mechanical (windage + bearing) | 50 | Airgap, bearings |
-| Inverter (GaN conduction + switching) | 157 | Annular PCB |
-| **Total** | **1,207** | |
-| **System efficiency** | **94.3%** | Motor: 95.0%, Inverter: 99.2% |
+![Fig. 3: Motor and System Loss Budget](../figures/fig3_loss_budget.png)
+
+| Source | Losses (W) | % of Total | Location |
+|---|---|---|---|
+| Copper (AC, 150°C adjusted) | 583 | 52.4% | Stator windings |
+| Iron (NO20, hysteresis + eddy, ×1.5 build factor) | 161 | 14.5% | Stator teeth + back-iron |
+| Rotor (eddy in magnets) | 209 | 18.8% | Halbach segments |
+| Mechanical (windage + bearing) | 2 | 0.2% | Airgap, bearings |
+| **Motor subtotal** | **955** | **85.9%** | η_motor = 95.4% |
+| Inverter (GaN conduction + switching) | 157 | 14.1% | Annular PCB |
+| **System total** | **1,112** | **100%** | |
+| **System efficiency** | **94.7%** | | Motor × Inverter |
+
+**Magnet eddy current losses (209 W)** are the second-largest contributor due to concentrated winding space harmonics. Mitigation in detailed design: circumferential magnet segmentation (4 segments/pole) reduces eddy losses by 60–80%, targeting <80 W in the final design (WP2).
 
 ### 1.2.5 Thermal Design
+
+![Fig. 4: Cooling Method Comparison](../figures/fig4_thermal.png)
 
 The two-phase cooling system maintains all components within safe operating temperatures:
 
@@ -192,6 +213,10 @@ Each pillar has a clear technology precedent:
 
 The synergy of combining all four — not any single pillar alone — is the breakthrough. Individual component TRLs are 4–6; the integrated system is TRL 3–4.
 
+![Fig. 5: System Mass Budget — 3.39 kg total](../figures/fig5_mass_budget.png)
+
+**System mass breakdown:** Total 3.39 kg yields a continuous specific power of **5.9 kW/kg** and peak specific power of **8.8 kW/kg**, exceeding the 5 kW/kg target by 18%.
+
 ---
 
 # Section 2: IMPACT
@@ -200,7 +225,9 @@ The synergy of combining all four — not any single pillar alone — is the bre
 
 ### 2.1.1 Market Opportunity
 
-The global UAV market is projected to reach EUR 58 billion by 2030 (CAGR 14.7%), with the electric propulsion subsystem representing 8–12% of platform value. The eVTOL/Urban Air Mobility segment adds a further EUR 15–20 billion by 2035.
+![Fig. 9: Addressable Market Projections](../figures/fig9_market.png)
+
+The global UAV market is projected to reach USD 117.6 billion by 2030 (CAGR 12.5%), with the eVTOL segment growing at 35.3% CAGR to USD 17.34 billion by 2035. The aircraft electric motors market reaches USD 20.8 billion by 2034 (CAGR 9.1%). Over 50,000 eVTOL aircraft are expected by 2030, each requiring 4–36 electric motors.
 
 AURORA X targets three market segments:
 
@@ -240,6 +267,15 @@ AURORA X directly contributes to:
 | Journal publications | 4–6 (Gold OA) |
 | Conference presentations | 8–10 |
 | CO₂ reduction enabled | 500–1000 t/year (vs. combustion alternatives) |
+
+### 2.1.4 TRL Advancement
+
+![Fig. 8: Technology Readiness Level Roadmap](../figures/fig8_trl_roadmap.png)
+
+The project advances the integrated propulsion system from TRL 3–4 (analytical proof-of-concept with individual component lab validation) to TRL 5–6 (system-level validation in relevant environment). Key TRL evidence:
+- **TRL 3→4 (M1–M12):** Lab validation of individual pillars — GaN inverter on bench, two-phase cooling thermal resistance measurement, Halbach rotor magnetization
+- **TRL 4→5 (M12–M20):** Integration of all four pillars into a single demonstrator, closed-loop FOC operation
+- **TRL 5→6 (M20–M24):** System-level dyno testing at rated power, 100-hour endurance run, environmental testing (vibration, thermal cycling)
 
 ## 2.2 Dissemination and Communication
 
@@ -284,18 +320,11 @@ AURORA X directly contributes to:
 
 ### 3.1.3 Gantt Chart
 
-```
-Month:  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
-WP1:    ████████████◆
-WP2:       ██████████████████████████████████◆
-WP3:          █████████████████████████████████████◆
-WP4:                      ██████████████████████████████████◆
-WP5:                            ████████████████████████████████████████◆
-WP6:                                              ██████████████████████████████████◆
-        ◆ = Milestone
-```
+![Fig. 6: Project Timeline — 24 months, 6 Work Packages](../figures/fig6_gantt.png)
 
 ### 3.1.4 Budget Summary
+
+![Fig. 7: Budget Breakdown and Effort Distribution](../figures/fig7_budget.png)
 
 | Category | Amount (EUR) | % |
 |---|---|---|
@@ -322,7 +351,9 @@ Top risks with mitigation strategies:
 | **R08: Weight exceeded** | High | Component-level mass budget; topology optimization |
 | **R09: Key person leaves** | High | Named deputies; systematic knowledge documentation |
 
-Full risk register with 10 identified risks, risk matrix, and quality assurance plan (design review gates: SRR M4, PDR M10, CDR M16, TRR M22, FR M24).
+![Fig. 10: Risk Matrix (Post-Mitigation)](../figures/fig10_risk_matrix.png)
+
+Full risk register with 10 identified risks, quality assurance plan, and design review gates: SRR M4, PDR M10, CDR M16, TRR M22, FR M24.
 
 ## 3.2 Team and Consortium
 
