@@ -120,12 +120,10 @@ ul { margin: 12px 0 16px 24px; } li { margin-bottom: 6px; line-height: 1.65; }
 .section-divider { height: 1px; background: var(--border); border: none; border-radius: 0; margin: 8px 0; position: relative; }
 .section-divider::before { content: ''; position: absolute; left: 0; top: 0; width: 60px; height: 1px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
 .toc {
-  position: sticky; top: 24px; z-index: 50;
+  position: static;
   background: white; border-radius: 16px; padding: 24px 28px; margin: 40px 0;
   box-shadow: 0 8px 32px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
   border: 1px solid rgba(0,0,0,0.05);
-  max-height: calc(100vh - 48px); overflow-y: auto;
-  scrollbar-width: thin; scrollbar-color: var(--border) transparent;
 }
 .toc::-webkit-scrollbar { width: 4px; }
 .toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
